@@ -1,0 +1,22 @@
+<div class="list">
+
+  <mat-card *ngFor="let todo of todoList" class="todo">
+
+    <mat-card-header>
+      <mat-card-title>{{todo.title}}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <p>{{todo.description}}</p>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-flat-button>
+          <mat-icon *ngIf="todo.acknowledge" svgIcon="check"></mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+</div>
+
+

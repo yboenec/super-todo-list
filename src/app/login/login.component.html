@@ -1,0 +1,22 @@
+<form [formGroup]="formLogin" (submit)="onFormSubmit()">
+    <mat-card class="login center mat-elevation-z6">
+      <mat-card-header>
+        <mat-icon color="primary" svgIcon="account_box" class="account"></mat-icon>
+      </mat-card-header>
+
+      <mat-card-content>
+          <mat-form-field>
+            <input matInput class="username" placeholder="Username" formControlName="username">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput class="password" placeholder="Password" formControlName="password" type="password">
+          </mat-form-field>
+      </mat-card-content>
+
+      <mat-card-actions>
+          <button mat-raised-button class="submit" color="primary" [disabled]="formLogin.invalid">Log in</button>
+      </mat-card-actions>
+
+    </mat-card>
+</form>

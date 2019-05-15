@@ -1,0 +1,50 @@
+image: docker-registry:443/viveris/node-chrome:10-jessie
+
+stages:
+  - lint
+  - build
+  - test
+  - package
+
+before_script:
+  - npm set registry http://nexus3.b2i-toulouse.prive/repository/npm-all
+  - npm install
+
+lint:
+  stage: lint
+  script:
+    - npm run lint
+
+build:
+  stage: build
+  script:
+    - npm run build
+
+test:
+  stage: test
+  script: npm run test
+
+packaging:
+  only:
+    refs:
+      - branches
+    variables:
+      - $CI_COMMIT_REF_NAME == "master"
+  stage: package
+  artifacts:
+    name: "$CI_PROJECT_NAME-$CI_COMMIT_SHA"
+    paths:
+      - dist/$CI_PROJECT_NAME/*
+  script:
+    - npm run build
+
+packaging-release:
+  only:
+    - tags
+  stage: package
+  artifacts:
+    name: "$CI_PROJECT_NAME-$CI_COMMIT_TAG"
+    paths:
+      - dist/$CI_PROJECT_NAME/*
+  script:
+    - npm run build

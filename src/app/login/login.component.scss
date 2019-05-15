@@ -1,0 +1,39 @@
+.login {
+
+  width: 250px;
+  height: 280px;
+
+  &.mat-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    .mat-card-header {
+
+      .mat-icon {
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%,0%);
+      }
+
+      margin-bottom: 5em;
+    }
+
+    .mat-card-content {
+      .mat-form-field {
+        margin-left: 2em;
+      }
+    }
+
+    .mat-card-actions {
+      .mat-raised-button {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%,0%);
+      }
+    }
+  }
+}

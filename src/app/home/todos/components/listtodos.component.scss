@@ -1,0 +1,8 @@
+.list {
+  display: flex;
+  flex-wrap: wrap;
+
+  .todo {
+    margin: 1em 2em;
+  }
+}
