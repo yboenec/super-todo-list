@@ -11,8 +11,8 @@
     </mat-card-content>
 
     <mat-card-actions>
-      <button mat-flat-button>
-          <mat-icon *ngIf="todo.acknowledge" svgIcon="check"></mat-icon>
+      <button mat-flat-button (click)="acknowledge(todo.id)">
+          <mat-icon *ngIf="!todo.acknowledge" svgIcon="check"></mat-icon>
       </button>
     </mat-card-actions>
   </mat-card>

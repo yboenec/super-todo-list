@@ -1,3 +1,4 @@
+import { EffectsModule } from '@ngrx/effects';
 import { BackendModule } from './backend/backend.module';
 import { AuthModule } from './auth/auth.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -20,7 +21,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatIconModule,
     AuthModule.forRoot(),
     BackendModule.forRoot(),
-    StoreModule.forRoot({})
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([])
   ],
   providers: [],
   bootstrap: [AppComponent]

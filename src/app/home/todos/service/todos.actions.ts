@@ -4,29 +4,38 @@ import { Update } from '@ngrx/entity';
 
 export enum TodoActions {
   ADD = 'Add todo',
-  LIST = 'List todo',
+  LIST_LOADING = 'List loading todo',
+  LIST_LOADED = 'List loaded todo',
   MODIFY = 'Modify todo'
 }
 
 export class AddTodoAction implements Action {
   readonly type: string = TodoActions.ADD;
 
-  constructor(public payload: {todo: Todo}) {}
+  constructor(public payload: Todo) {}
 }
 
-export class ListTodoAction implements Action {
-  readonly type: string = TodoActions.LIST;
+export class ListTodoLoadedAction implements Action {
+  readonly type: string = TodoActions.LIST_LOADED;
 
-  constructor(public payload: {todos: Todo[]}) {}
+  constructor(public payload: Todo[]) {
+  }
+}
+
+export class ListTodoLoadingAction implements Action {
+  readonly type: string = TodoActions.LIST_LOADING;
+  public payload = null;
+  constructor() {}
 }
 
 export class ModifyTodoAction implements Action {
   readonly type: string = TodoActions.MODIFY;
 
-  constructor(public payload: {todo: Update<Todo>}) {}
+  constructor(public payload: Update<Todo>) {}
 }
 
-export type TodoActionsList =
+export type TodoActionList =
   ModifyTodoAction |
-  ListTodoAction |
+  ListTodoLoadedAction |
+  ListTodoLoadingAction |
   AddTodoAction;
