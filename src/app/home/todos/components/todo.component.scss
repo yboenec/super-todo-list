@@ -1,0 +1,20 @@
+.mat-fab {
+  position: fixed;
+  bottom: 20px;
+
+  &.check {
+    right: 20px;
+  }
+
+  &.back {
+    left: 20px;
+  }
+}
+
+.todo {
+  margin: 2em 15em;
+
+  .content {
+    margin-top: 2em;
+  }
+}

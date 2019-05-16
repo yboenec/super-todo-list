@@ -1,25 +1,27 @@
 import { TodoActionList, TodoActions } from './todos.actions';
 import { Todo } from './../model/todo.interface';
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import { EntityState, EntityAdapter, createEntityAdapter, Dictionary } from '@ngrx/entity';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 export interface TodoState extends EntityState<Todo> {
-  loading: boolean;
   loaded: boolean;
 }
 
 export const adapter: EntityAdapter<Todo> = createEntityAdapter<Todo>();
 
 export const initialState = adapter.getInitialState({
-  loading: false,
   loaded: false
 });
 
 export function todoReducer(state = initialState, action: TodoActionList): TodoState {
   switch (action.type) {
     case TodoActions.LIST_LOADED:
-      return adapter.addAll(action.payload, state);
+      if (!state.loaded) {
+        return adapter.addAll(action.payload, {...state, loaded: true});
+      }
+      return state;
     case TodoActions.ADD:
+      console.log(action.payload);
       return adapter.addOne(action.payload, state);
     case TodoActions.MODIFY:
       return adapter.updateOne(action.payload, state);
@@ -32,7 +34,7 @@ export const selectTodosState = createFeatureSelector<TodoState>('todo');
 
 const {
   selectEntities,
-  selectAll
+  selectAll,
 } = adapter.getSelectors();
 
 // select the dictionary of todos entities
@@ -40,3 +42,7 @@ export const selectTodosEntities = createSelector(selectTodosState, selectEntiti
 
 // select the array of todos
 export const selectAllTodos = createSelector(selectTodosState, selectAll);
+
+export const selectCurrentUserId = createSelector(selectTodosEntities, todos => (id: string) => {
+  return todos[id];
+});

@@ -1,0 +1,26 @@
+<mat-card class="todo">
+
+  <mat-card-header>
+    <mat-card-title>{{todo.title}}</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content class="content">
+    <tr>
+      <td><strong>Creation date:  </strong></td>
+      <td>{{todo.creationDate | date : 'long' }}</td>
+    </tr>
+    <br/>
+    <tr>
+      <td><strong>Description:</strong></td>
+      <td>{{todo.description}}</td>
+    </tr>
+  </mat-card-content>
+</mat-card>
+
+<button title="Back to list" color="primary" mat-fab class="back" (click)="back()">
+  <mat-icon svgIcon="back"></mat-icon>
+</button>
+
+<button title="Acknowledge todo" color="primary" mat-fab class="check" *ngIf="!todo.acknowledge" (click)="acknowledge(todo.id)">
+  <mat-icon svgIcon="check"></mat-icon>
+</button>

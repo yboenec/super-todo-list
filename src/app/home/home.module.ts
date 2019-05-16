@@ -1,3 +1,4 @@
+import { AddTodoComponent } from './todos/components/addtodo.component';
 import { TodosEffects } from './todos/service/todos.effects';
 import { StoreModule } from '@ngrx/store';
 import { TodosService } from './todos/service/todos.service';
@@ -9,6 +10,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { todoReducer } from './todos/service/todos.reducers';
 import { EffectsModule } from '@ngrx/effects';
+import { TodoComponent } from './todos/components/todo.component';
+import { MatTableModule, MatDialogModule } from '@angular/material';
 
 /**
  * Home module
@@ -18,7 +21,9 @@ import { EffectsModule } from '@ngrx/effects';
 @NgModule({
   declarations: [
     HomeComponent,
-    ListTodosComponent
+    ListTodosComponent,
+    TodoComponent,
+    AddTodoComponent
   ],
   providers: [
     TodosService
@@ -27,8 +32,11 @@ import { EffectsModule } from '@ngrx/effects';
     HomeRoutingModule,
     RouterModule,
     SharedModule,
+    MatTableModule,
+    MatDialogModule,
     StoreModule.forFeature('todo', todoReducer),
     EffectsModule.forFeature([TodosEffects])
-  ]
+  ],
+  entryComponents: [AddTodoComponent]
 })
 export class HomeModule { }

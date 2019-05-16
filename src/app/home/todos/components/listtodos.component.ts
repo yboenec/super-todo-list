@@ -1,27 +1,34 @@
-import { Update } from '@ngrx/entity';
+import { AddTodoComponent } from './addtodo.component';
+import { MatDialog } from '@angular/material';
 import { map } from 'rxjs/operators';
 import { ListTodoLoadingAction, ModifyTodoAction } from './../service/todos.actions';
 import { TodoState, selectAllTodos } from './../service/todos.reducers';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Todo } from '../model/todo.interface';
 import { Store, select } from '@ngrx/store';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   templateUrl: './listtodos.component.html',
   styleUrls: ['./listtodos.component.scss']
 })
-export class ListTodosComponent implements OnInit {
+export class ListTodosComponent implements OnInit, OnDestroy {
 
+  displayedColumns: string[] = ['Title', 'Status', 'Action'];
   todoList: Array<Todo>;
+  private storeSub: Subscription;
 
-  constructor(private store: Store<TodoState>) {
+  constructor(private store: Store<TodoState>, public router: Router, private dialogService: MatDialog) {
   }
 
   ngOnInit(): void {
-    this.store.pipe(select(selectAllTodos), map(todos => todos.sort(this.compareTodo))).subscribe(todos => {
-      this.todoList = todos;
-    });
+    this.loadEntities();
     this.loadTodo();
+  }
+
+  ngOnDestroy(): void {
+    this.storeSub.unsubscribe();
   }
 
   acknowledge(id: number): void {
@@ -30,6 +37,18 @@ export class ListTodosComponent implements OnInit {
       changes: {acknowledge: true}
     };
     this.store.dispatch(new ModifyTodoAction(update));
+  }
+
+  addTodo(): void {
+    this.dialogService.open(AddTodoComponent,  {
+      width: '400px',
+    }).afterClosed().subscribe(() => this.loadEntities());
+  }
+
+  private loadEntities(): void {
+    this.storeSub = this.store.pipe(select(selectAllTodos)).subscribe(todos => {
+      this.todoList = todos.sort(this.compareTodo);
+    });
   }
 
   private loadTodo(): void {

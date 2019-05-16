@@ -1,8 +1,18 @@
-.list {
-  display: flex;
-  flex-wrap: wrap;
+.mat-table {
+  width: 100%;
 
-  .todo {
-    margin: 1em 2em;
+  .title {
+    cursor: pointer;
+
+    &:hover {
+      color:#1E90FF;
+    }
   }
 }
+
+.add {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+

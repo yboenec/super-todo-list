@@ -12,6 +12,8 @@ export class AppComponent {
   constructor(private iconRegistry: MatIconRegistry, private sanitizer: DomSanitizer) {
     this.addIcon('account_box', 'account_box');
     this.addIcon('check', 'check');
+    this.addIcon('add', 'add');
+    this.addIcon('back', 'back');
   }
 
   private addIcon(iconName: string, iconFile: string) {

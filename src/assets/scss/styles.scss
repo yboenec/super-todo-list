@@ -3,4 +3,12 @@
 
 body {
   margin: 0;
+
+  button {
+    &.add {
+      position: fixed !important;
+      bottom: 20px !important;
+      right: 20px !important;
+    }
+  }
 }
