@@ -4,7 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { Todo } from '../model/todo.interface';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
-import { selectCurrentUserId } from '../service/todos.reducers';
+import { selectCurrentTodoId } from '../service/todos.reducers';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -22,8 +22,9 @@ export class TodoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subRoute = this.route.paramMap.subscribe(params => {
-      this.storeSub = this.store.pipe(select(selectCurrentUserId), map(f => f(params.get('id')))).subscribe(todo => {
+    this.subRoute = this.route.params.subscribe(params => {
+      // tslint:disable-next-line: no-string-literal
+      this.storeSub = this.store.pipe(select(selectCurrentTodoId), map(f => f(params['id']))).subscribe(todo => {
         if (!todo) {
           this.back();
         }

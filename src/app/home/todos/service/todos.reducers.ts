@@ -21,7 +21,6 @@ export function todoReducer(state = initialState, action: TodoActionList): TodoS
       }
       return state;
     case TodoActions.ADD:
-      console.log(action.payload);
       return adapter.addOne(action.payload, state);
     case TodoActions.MODIFY:
       return adapter.updateOne(action.payload, state);
@@ -43,6 +42,6 @@ export const selectTodosEntities = createSelector(selectTodosState, selectEntiti
 // select the array of todos
 export const selectAllTodos = createSelector(selectTodosState, selectAll);
 
-export const selectCurrentUserId = createSelector(selectTodosEntities, todos => (id: string) => {
+export const selectCurrentTodoId = createSelector(selectTodosEntities, todos => (id: string) => {
   return todos[id];
 });

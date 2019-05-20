@@ -9,13 +9,7 @@ import { Component } from '@angular/core';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-
 export class HomeComponent {
-
-  /**
-   * Home component constructor
-   * @param dialog: MatDialog to be taken as arguemnt
-   */
   constructor() { }
 }
 

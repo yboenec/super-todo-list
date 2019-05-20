@@ -30,7 +30,6 @@ export class AddTodoComponent implements OnInit {
   }
 
   save(): void {
-
     this.store.dispatch(new AddTodoAction(this.form.value));
     this.dialogRef.close();
   }

@@ -1,6 +1,5 @@
 import { AddTodoComponent } from './addtodo.component';
-import { MatDialog } from '@angular/material';
-import { map } from 'rxjs/operators';
+import { MatDialog, MatDialogRef } from '@angular/material';
 import { ListTodoLoadingAction, ModifyTodoAction } from './../service/todos.actions';
 import { TodoState, selectAllTodos } from './../service/todos.reducers';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -45,9 +44,10 @@ export class ListTodosComponent implements OnInit, OnDestroy {
     }).afterClosed().subscribe(() => this.loadEntities());
   }
 
-  private loadEntities(): void {
-    this.storeSub = this.store.pipe(select(selectAllTodos)).subscribe(todos => {
-      this.todoList = todos.sort(this.compareTodo);
+  loadEntities(): void {
+    this.storeSub = this.store.select(selectAllTodos).subscribe(todos => {
+      this.todoList = todos.sort(this.compareDate);
+      this.todoList = this.todoList.sort(this.compareAck);
     });
   }
 
@@ -55,13 +55,23 @@ export class ListTodosComponent implements OnInit, OnDestroy {
     this.store.dispatch(new ListTodoLoadingAction());
   }
 
-  private compareTodo(a: Todo, b: Todo): number {
+  private compareAck(a: Todo, b: Todo): number {
     if (a.acknowledge && b.acknowledge) {
       return 0;
     } else if (a.acknowledge && !b.acknowledge) {
       return 1;
     } else {
       return -1;
+    }
+  }
+
+  private compareDate(a: Todo, b: Todo): number {
+    if (a.creationDate > b.creationDate) {
+      return 1;
+    } else if (a.creationDate < b.creationDate) {
+      return -1;
+    } else {
+      return 0;
     }
   }
 }

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-quick-start": {
+    "super-todo-list": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angular-quick-start",
+            "outputPath": "dist/super-todo-list",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -62,18 +62,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-quick-start:build"
+            "browserTarget": "super-todo-list:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular-quick-start:build:production"
+              "browserTarget": "super-todo-list:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-quick-start:build"
+            "browserTarget": "super-todo-list:build"
           }
         },
         "test": {
@@ -107,7 +107,7 @@
         }
       }
     },
-    "angular-quick-start-e2e": {
+    "super-todo-list-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -116,11 +116,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "angular-quick-start:serve"
+            "devServerTarget": "super-todo-list:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "angular-quick-start:serve:production"
+              "devServerTarget": "super-todo-list:serve:production"
             }
           }
         },
@@ -136,5 +136,5 @@
       }
     }
   },
-  "defaultProject": "angular-quick-start"
+  "defaultProject": "super-todo-list"
 }
