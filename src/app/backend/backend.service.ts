@@ -1,6 +1,5 @@
-import { XhrFactory } from '@angular/common/http/src/xhr';
 import { OauthResponse } from './../auth/model/auth';
-import { HttpXhrBackend, HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
+import { HttpXhrBackend, HttpRequest, HttpEvent, HttpResponse, XhrFactory } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 

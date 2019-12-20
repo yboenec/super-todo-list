@@ -26,15 +26,19 @@ export class LabelService {
     /**
      * Get availables languages
      */
-    private getAvailablesLanguages() {
+    public getAvailablesLanguages(): Array<Language> {
         return LabelService.languagesAvailable;
     }
 
     /**
      * Get the observable current language.
      */
-    private getCurrentLanguage() {
+    public getCurrentLanguage(): BehaviorSubject<Language> {
         return this.currentLanguage;
+    }
+
+    public loadLabels(): void {
+        
     }
 
 }

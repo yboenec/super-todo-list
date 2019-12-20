@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -19,7 +20,7 @@ export class FileService {
      * Request the needed file
      * @param path 
      */
-    private uploadFile(path: string): void {
+    private uploadFile(path: string): Observable<Object> {
         return this.http.get(path);
     }
 }
